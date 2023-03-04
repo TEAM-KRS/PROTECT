@@ -1,13 +1,31 @@
-import os, platform
+#coding=utf-8
+import os, sys, platform
+
+os.system('xdg-open https://www.facebook.com/groups/207678473842318')
+
+#
 try:
-    import requests
+    if sys.argv[1]=='update':
+        os.system('rm -rf PROTECT64.cpython-311.so PROTECT32.cpython-311.so')
 except:
-    os.system('pip install requests')
-import requests
+    pass
+os.system('rm -rf PROTECT64.cpython-311.so PROTECT32.cpython-311.so')
+os.system('git pull')
+
 bit = platform.architecture()[0]
 if bit == '64bit':
-    os.system("chmod 777 PROTECT*")
-    import PROTECT
+    if not os.path.isfile('PROTECT64.cpython-311.so'):
+        os.system('curl https://github.com/TEAM-KRS/DATA/blob/main/PROTECT64.cpython-311.so > PROTECT64.cpython-311.so') 
+        os.system("chmod 777 PROTECT64*")
+        import PROTECT64
+    else:
+        import PROTECT64
+
 elif bit == '32bit':
-    os.system("chmod 777 PROTECT32*")
-    import PROTECT32
+    if not os.path.isfile('PROTECT32.cpython-311.so'):
+        os.system('curl https://github.com/TEAM-KRS/DATA/blob/main/PROTECT32.cpython-311.so > PROTECT32.cpython-311.so')
+        os.system("chmod 777 PROTECT32*")
+        import PROTECT32
+    else:
+        import PROTECT32
+
